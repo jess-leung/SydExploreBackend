@@ -13,6 +13,7 @@ def postReview(request):
     try:
     	# parse JSON 
         data=json.loads(request.body)
+        print data
         review_title=data['reviewTitle']
         review_text=data['reviewText']
         reviewer_name=data['reviewer']
