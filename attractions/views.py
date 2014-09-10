@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-import json
+from django.utils import simplejson
 import nltk 
 from django.utils import timezone
 from attractions.models import Review
@@ -12,8 +12,8 @@ def postReview(request):
     print 'Post from Android'
     try:
     	# parse JSON 
-        data=json.loads(request.body)
-        print data
+    	print request
+        simplejson.loads(request.body, "utf-8")
         review_title=data['reviewTitle']
         review_text=data['reviewText']
         reviewer_name=data['reviewer']
