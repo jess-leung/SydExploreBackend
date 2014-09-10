@@ -12,8 +12,9 @@ def postReview(request):
     print 'Post from Android'
     try:
     	# parse JSON 
-    	print request.body
+    	# print request.body
         data = json.load(request.body)
+        print data
         review_title=data['reviewTitle']
         review_text=data['reviewText']
         reviewer_name=data['reviewer']
