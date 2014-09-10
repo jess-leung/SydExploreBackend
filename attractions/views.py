@@ -26,11 +26,11 @@ def postReview(request):
         print review_rating
         print review_attraction
         # search what the attraction id is 
-        #attraction = Attraction.objects.get(name=review_attraction)
-        #attraction_id = attraction.id 
+        attraction = Attraction.objects.get(name=review_attraction)
+        # attraction_id = attraction.id 
 
         # create review 
-        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=review_attraction)
+        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
         r.save()
 
         # onto the machine learning bit 
