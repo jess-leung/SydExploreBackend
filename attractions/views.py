@@ -30,6 +30,7 @@ def postReview(request):
         # onto the machine learning bit 
         review_category = classifyReview(review_text, review_title)
 
+        # TODO
  		# get the category of the attraction that the review is affecting 
 
  		# increment the voted category by 1 
