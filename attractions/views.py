@@ -18,7 +18,11 @@ def postReview(request):
         reviewer_name=data['reviewer']
         review_rating=data['rating']
         review_attraction=data['attraction']
-
+        print review_title
+        print review_text
+        print reviewer_name
+        print review_rating
+        print review_attraction
         # search what the attraction id is 
         #attraction = Attraction.objects.get(name=review_attraction)
         #attraction_id = attraction.id 
@@ -29,7 +33,7 @@ def postReview(request):
 
         # onto the machine learning bit 
         review_category = classifyReview(review_text, review_title)
-
+        print review_category
         # TODO
  		# get the category of the attraction that the review is affecting 
 
