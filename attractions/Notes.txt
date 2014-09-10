@@ -1,0 +1,15 @@
+To have launchd start postgresql at login:
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+Then to load postgresql now:
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+Or, if you don't want/need launchctl, you can just run:
+    postgres -D /usr/local/var/postgres
+
+
+Change your models (in models.py).
+Run python manage.py makemigrations to create migrations for those changes
+Run python manage.py migrate to apply those changes to the database.
+
+
+If the db has changed, run: heroku run python manage.py syncdb 
+
