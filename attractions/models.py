@@ -30,7 +30,7 @@ class Attraction(models.Model):
     description = models.TextField()
     url = models.URLField(max_length=200,blank=True)
     location = models.CharField(max_length=200)
-    image = models.ImageField() 
+    image = models.ImageField(blank=True) 
     category = models.CharField(max_length=3,choices=CATEGORY_CHOICES)
     vote_adventurous = models.PositiveIntegerField(default=0)
     vote_cultural = models.PositiveIntegerField(default=0)
@@ -42,6 +42,9 @@ class Attraction(models.Model):
     vote_luxurious = models.PositiveIntegerField(default=0)
     vote_natural = models.PositiveIntegerField(default=0)
     vote_social = models.PositiveIntegerField(default=0)
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.name
 
 class Review(models.Model):
     attraction = models.ForeignKey(Attraction)
