@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import nltk 
 from django.utils import timezone
-from attraction.models import Review
-from attraction.models import Attraction
+from attractions.models import Review
+from attractions.models import Attraction
 
 @csrf_exempt    
 def postReview(request):

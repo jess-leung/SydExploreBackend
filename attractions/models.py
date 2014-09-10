@@ -52,4 +52,4 @@ class Review(models.Model):
     reviewer_name = models.CharField(max_length=200,blank=True)
     review_title = models.CharField(max_length=200)
     review_rating = models.PositiveIntegerField(default=0)
-    review_date = models.DateTimeField(auto_now=true)
+    review_date = models.DateTimeField(auto_now_add=True)
