@@ -1,3 +1,4 @@
 from django.contrib import admin
+from attractions.models import Attraction
 
-# Register your models here.
+admin.site.register(Attraction)
