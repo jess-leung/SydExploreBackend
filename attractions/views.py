@@ -43,6 +43,8 @@ def postReview(request):
 
  		# if the voted category > current category, change category of the attraction 
 
+        # ENDTODO
+
     except:
         print 'Exception: Could not parse JSON'
     
