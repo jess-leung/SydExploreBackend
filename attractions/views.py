@@ -8,6 +8,7 @@ from attractions.models import Attraction
 import cPickle as pickle 
 import nltk
 from nltk import word_tokenize
+from collections import defaultdict 
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
@@ -54,7 +55,6 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     review_text_tokenized = word_tokenize(review_text)
     review_title_tokenized = word_tokenize(review_title)
     review_attraction_tokenized = word_tokenize(review_attraction)
-    print review_text_tokenized
     thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
     classifierFile = open('textClassification/classifier.pkl','rb')
     classifier = pickle.load(classifierFile)
