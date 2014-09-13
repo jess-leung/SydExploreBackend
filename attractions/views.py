@@ -12,6 +12,7 @@ from collections import defaultdict
 import string
 from porter2 import stem
 from sklearn.svm import LinearSVC
+from sklearn.feature_extraction import DictVectorizer
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
@@ -54,12 +55,14 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
     return features
 
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
+    vec = DictVectorizer()
     review_text_tokenized = word_tokenize(review_text)
     review_title_tokenized = word_tokenize(review_title)
     review_attraction_tokenized = word_tokenize(review_attraction)
     thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
     classifierFile = open('textClassification/classifier.pkl','rb')
     selectorFile = open('textClassification/selector.pkl','rb')
+    thisFeatures = vec.transform(thisFeatures)
     selector = pickle.load(selectorFile)
     classifier = pickle.load(classifierFile)
     thisFeatures = selector.transform(thisFeatures)
