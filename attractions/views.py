@@ -13,6 +13,7 @@ import string
 from porter2 import stem
 from sklearn.svm import LinearSVC
 from sklearn.feature_extraction import DictVectorizer
+import random 
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
@@ -101,14 +102,64 @@ def postReview(request):
         # onto the machine learning bit 
         review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
         print 'This review is classified as: ',review_category
-        # TODO
+
         # get the category of the attraction that the review is affecting 
+        # and increment the voted category by 1 
+        affected_vote_count=0
+        new_category=''
+        if review_category == 'Cultural': 
+            affected_vote_count = attraction.vote_cultural
+            attraction.vote_cultural = affected_vote_count+1
+            new_category = 'Cultural'
+        elif review_category == 'Education':
+            affected_vote_count = attraction.vote_education
+            attraction.vote_education = affected_vote_count+1
+            new_category = 'Education'
+        elif review_category == 'Social':
+            affected_vote_count = attraction.vote_social
+            attraction.vote_social = affected_vote_count+1
+            new_category = 'Social'
+        elif review_category == 'Adventurous':
+            affected_vote_count = attraction.vote_adventurous
+            attraction.vote_adventurous = affected_vote_count+1
+            new_category = 'Adventurous'
+        elif review_category == 'Fun':
+            affected_vote_count = attraction.vote_fun
+            attraction.vote_fun = affected_vote_count+1
+            new_category = 'Fun'
+        elif review_category == 'Lazy':
+            affected_vote_count = attraction.vote_lazy
+            attraction.vote_lazy = affected_vote_count+1
+            new_category = 'Lazy'
+        elif review_category == 'Hungry':
+            affected_vote_count = attraction.vote_hungry
+            attraction.vote_hungry = affected_vote_count+1
+            new_category = 'Hungry'
+        elif review_category == 'Natural':
+            affected_vote_count = attraction.vote_natural
+            attraction.vote_natural = affected_vote_count+1
+            new_category = 'Natural'
+        elif review_category == 'Historical': 
+            affected_vote_count = attraction.vote_historical
+            attraction.vote_historical = affected_vote_count+1
+            new_category = 'Historical'
+        else: #luxurious 
+            affected_vote_count = attraction.vote_luxurious
+            attraction.vote_luxurious = affected_vote_count+1
+            new_category = 'Luxurious'
 
-        # increment the voted category by 1 
-
+        # get current category count 
+        current_category_count = attraction.vote_category 
+        affected_vote_count+=1
         # if the voted category > current category, change category of the attraction 
-
-        # ENDTODO
+        if affected_vote_count > current_category_count: 
+            attraction.category = new_category 
+            attraction.vote_category = affected_vote_count
+        elif affected_vote_count == current_category_count:
+            tiebreaker = random.randint(0,1)
+            # if tiebreaker = 0 then change to the new category and update the count for that to be affected_vote_count
+            if tiebreaker == 0: 
+                attraction.category = new_category
 
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)

@@ -32,6 +32,7 @@ class Attraction(models.Model):
     location = models.CharField(max_length=200)
     image = models.ImageField(blank=True) 
     category = models.CharField(max_length=3,choices=CATEGORY_CHOICES)
+    vote_category = models.PositiveIntegerField(default=0)
     vote_adventurous = models.PositiveIntegerField(default=0)
     vote_cultural = models.PositiveIntegerField(default=0)
     vote_education = models.PositiveIntegerField(default=0)
