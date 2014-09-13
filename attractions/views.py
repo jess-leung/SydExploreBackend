@@ -11,18 +11,6 @@ from nltk import word_tokenize
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
 
-def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
-    review_text_tokenized = word_tokenize(review_text)
-    review_title_tokenized = word_tokenize(review_title)
-    review_attraction_tokenized = word_tokenize(review_attraction)
-    print review_text_tokenized
-    thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
-    classifierFile = open('textClassification/classifier.pkl','rb')
-    classifier = pickle.load(classifierFile)
-    this_class = classifier.predict(thisFeatures)
-    print this_class
-    return this_class
-
 def getFeatures(attraction,title,bodyText,labels,stopwords): 
     features = defaultdict() 
     for word in attraction: 
@@ -59,6 +47,19 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
     features[('length_review',len(bodyText))]=1
     return features
 
+def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
+    print 'here'
+    review_text_tokenized = word_tokenize(review_text)
+    review_title_tokenized = word_tokenize(review_title)
+    review_attraction_tokenized = word_tokenize(review_attraction)
+    print review_text_tokenized
+    thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
+    classifierFile = open('textClassification/classifier.pkl','rb')
+    classifier = pickle.load(classifierFile)
+    this_class = classifier.predict(thisFeatures)
+    print this_class
+    return this_class
+
 @csrf_exempt    
 def postReview(request):
     print 'Post from Android'
@@ -81,7 +82,7 @@ def postReview(request):
 
         for line in open('textClassification/stopwords'):
             stopwords.append(line.strip()) 
-
+        print 'Stopwords: ',stopwords 
         # onto the machine learning bit 
         review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
         print 'This review is classified as: ',review_category
@@ -94,7 +95,7 @@ def postReview(request):
 
         # ENDTODO
 
-    except:
-        print 'Exception: Could not parse JSON', sys.exc_info()[0]
+    except Error as e:
+        print 'Exception: Could not parse JSON ', e.value
     
     return HttpResponse('Review Submitted')
