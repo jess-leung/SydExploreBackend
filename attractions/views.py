@@ -64,7 +64,7 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     ''' Load pickle objects ''' 
     classifierFile = open('textClassification/classifier.pkl','rb')
     selectorFile = open('textClassification/selector.pkl','rb')
-    vecFile = open('textClassification/DictVect.pkl','rb')
+    vecFile = open('textClassification/dictvect.pkl','rb')
     vec = pickle.load(vecFile)
     selector = pickle.load(selectorFile)
     classifier = pickle.load(classifierFile)
