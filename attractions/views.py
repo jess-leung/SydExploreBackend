@@ -110,43 +110,43 @@ def postReview(request):
         if review_category == 'Cultural': 
             affected_vote_count = attraction.vote_cultural
             attraction.vote_cultural = affected_vote_count+1
-            new_category = 'Cultural'
+            new_category = 'CUL'
         elif review_category == 'Education':
             affected_vote_count = attraction.vote_education
             attraction.vote_education = affected_vote_count+1
-            new_category = 'Education'
+            new_category = 'EDU'
         elif review_category == 'Social':
             affected_vote_count = attraction.vote_social
             attraction.vote_social = affected_vote_count+1
-            new_category = 'Social'
+            new_category = 'SOC'
         elif review_category == 'Adventurous':
             affected_vote_count = attraction.vote_adventurous
             attraction.vote_adventurous = affected_vote_count+1
-            new_category = 'Adventurous'
+            new_category = 'ADV'
         elif review_category == 'Fun':
             affected_vote_count = attraction.vote_fun
             attraction.vote_fun = affected_vote_count+1
-            new_category = 'Fun'
+            new_category = 'FUN'
         elif review_category == 'Lazy':
             affected_vote_count = attraction.vote_lazy
             attraction.vote_lazy = affected_vote_count+1
-            new_category = 'Lazy'
+            new_category = 'LAZ'
         elif review_category == 'Hungry':
             affected_vote_count = attraction.vote_hungry
             attraction.vote_hungry = affected_vote_count+1
-            new_category = 'Hungry'
+            new_category = 'HUN'
         elif review_category == 'Natural':
             affected_vote_count = attraction.vote_natural
             attraction.vote_natural = affected_vote_count+1
-            new_category = 'Natural'
+            new_category = 'NAT'
         elif review_category == 'Historical': 
             affected_vote_count = attraction.vote_historical
             attraction.vote_historical = affected_vote_count+1
-            new_category = 'Historical'
+            new_category = 'HIS'
         else: #luxurious 
             affected_vote_count = attraction.vote_luxurious
             attraction.vote_luxurious = affected_vote_count+1
-            new_category = 'Luxurious'
+            new_category = 'LUX'
 
         # get current category count 
         current_category_count = attraction.vote_category 
