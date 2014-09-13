@@ -75,6 +75,7 @@ def postReview(request):
         # search what the attraction id is 
         attraction = Attraction.objects.get(name=review_attraction)
         # attraction_id = attraction.id 
+        print type(review_title)
 
         # create review 
         r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
@@ -82,7 +83,7 @@ def postReview(request):
 
         for line in open('textClassification/stopwords'):
             stopwords.append(line.strip()) 
-        print 'Stopwords: ',stopwords 
+
         # onto the machine learning bit 
         review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
         print 'This review is classified as: ',review_category
@@ -95,7 +96,7 @@ def postReview(request):
 
         # ENDTODO
 
-    except Error as e:
-        print 'Exception: Could not parse JSON ', e.value
+    except Exception,e:
+        print 'Exception: Could not parse JSON ',str(e)
     
     return HttpResponse('Review Submitted')
