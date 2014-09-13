@@ -6,6 +6,7 @@ from django.utils import timezone
 from attractions.models import Review
 from attractions.models import Attraction
 import cPickle as pickle 
+import nltk
 from nltk import word_tokenize
 
 stopwords = [] 
