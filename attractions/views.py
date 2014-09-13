@@ -11,7 +11,7 @@ from nltk import word_tokenize
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
-nltk.data.path.append('./textclassification/nltk_data/')
+nltk.data.path.append('textclassification/nltk_data/')
 
 def getFeatures(attraction,title,bodyText,labels,stopwords): 
     features = defaultdict() 
