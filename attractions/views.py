@@ -59,8 +59,10 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     review_attraction_tokenized = word_tokenize(review_attraction)
     thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
     classifierFile = open('textClassification/classifier.pkl','rb')
+    selectorFile = open('textClassification/selector.pkl','rb')
+    selector = pickle.load(selectorFile)
     classifier = pickle.load(classifierFile)
-    thisFeatures = classifier.transform(thisFeatures)
+    thisFeatures = selector.transform(thisFeatures)
     this_class = classifier.predict(thisFeatures)
     return this_class
 

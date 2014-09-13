@@ -24,7 +24,7 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
             features[('title_word',word.lower())]=1
             if word.lower() in labels:
                 features[('title_label',word.lower())]=1
-            if titleCount==0:d
+            if titleCount==0:
                 features[('first_word',word)]=1
         titleCount+=1
     counter = 0
@@ -100,6 +100,9 @@ features_dict_np = vec.fit_transform(features_dict)
 selector = SelectKBest(chi2, k=450)
 true_labels_np = np.array(true_labels)
 features_dict_np = selector.fit_transform(features_dict_np, true_labels_np)
+pickleSelectFile = open('selector.pkl','wb')
+pickle.dump(selector, pickleSelectFile, pickle.HIGHEST_PROTOCOL)
+pickleSelectFile.close()
 
 save_object = raw_input('Press 1 for ten fold or 2 for saving classifier')
 save_object = int(save_object)
