@@ -10,6 +10,7 @@ from nltk import word_tokenize
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
+nltk.data.path.append('./textclassification/nltk_data/')
 
 def getFeatures(attraction,title,bodyText,labels,stopwords): 
     features = defaultdict() 
@@ -75,7 +76,6 @@ def postReview(request):
         # search what the attraction id is 
         attraction = Attraction.objects.get(name=review_attraction)
         # attraction_id = attraction.id 
-        print type(review_title)
 
         # create review 
         r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
