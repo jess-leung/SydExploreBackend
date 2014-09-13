@@ -11,47 +11,6 @@ from nltk import word_tokenize
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
 
-@csrf_exempt    
-def postReview(request):
-    print 'Post from Android'
-    try:
-        # parse JSON 
-        # print request.body
-        data = json.loads(request.body)
-        review_title=data['reviewTitle']
-        review_text=data['reviewText']
-        reviewer_name=data['reviewer']
-        review_rating=data['rating']
-        review_attraction=data['attraction']
-        # search what the attraction id is 
-        attraction = Attraction.objects.get(name=review_attraction)
-        # attraction_id = attraction.id 
-
-        # create review 
-        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
-        r.save()
-
-        for line in open('textClassification/stopwords'):
-            print line
-            stopwords.append(line.strip()) 
-
-        # onto the machine learning bit 
-        review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
-        print 'This review is classified as: ',review_category
-        # TODO
-        # get the category of the attraction that the review is affecting 
-
-        # increment the voted category by 1 
-
-        # if the voted category > current category, change category of the attraction 
-
-        # ENDTODO
-
-    except:
-        print 'Exception: Could not parse JSON'
-    
-    return HttpResponse('Review Submitted')
-
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     review_text_tokenized = word_tokenize(review_text)
     review_title_tokenized = word_tokenize(review_title)
@@ -99,3 +58,43 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
         counter+=1
     features[('length_review',len(bodyText))]=1
     return features
+
+@csrf_exempt    
+def postReview(request):
+    print 'Post from Android'
+    try:
+        # parse JSON 
+        # print request.body
+        data = json.loads(request.body)
+        review_title=data['reviewTitle']
+        review_text=data['reviewText']
+        reviewer_name=data['reviewer']
+        review_rating=data['rating']
+        review_attraction=data['attraction']
+        # search what the attraction id is 
+        attraction = Attraction.objects.get(name=review_attraction)
+        # attraction_id = attraction.id 
+
+        # create review 
+        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
+        r.save()
+
+        for line in open('textClassification/stopwords'):
+            stopwords.append(line.strip()) 
+
+        # onto the machine learning bit 
+        review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
+        print 'This review is classified as: ',review_category
+        # TODO
+        # get the category of the attraction that the review is affecting 
+
+        # increment the voted category by 1 
+
+        # if the voted category > current category, change category of the attraction 
+
+        # ENDTODO
+
+    except:
+        print 'Exception: Could not parse JSON', sys.exc_info()[0]
+    
+    return HttpResponse('Review Submitted')
