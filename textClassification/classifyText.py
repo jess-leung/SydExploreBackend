@@ -6,7 +6,7 @@ from sklearn.feature_extraction import DictVectorizer
 import numpy as np
 from sklearn.cross_validation import KFold
 from sklearn import metrics 
-from porter2 import stem
+from textClassification.porter2 import stem
 from sklearn.feature_selection import SelectKBest,chi2
 from sklearn.feature_extraction.text import TfidfVectorizer 
 import string 
@@ -24,7 +24,7 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
             features[('title_word',word.lower())]=1
             if word.lower() in labels:
                 features[('title_label',word.lower())]=1
-            if titleCount==0:
+            if titleCount==0:d
                 features[('first_word',word)]=1
         titleCount+=1
     counter = 0
