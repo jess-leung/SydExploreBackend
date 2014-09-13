@@ -32,6 +32,7 @@ def postReview(request):
         r.save()
 
         for line in open('textClassification/stopwords'):
+            print line
             stopwords.append(line.strip()) 
 
         # onto the machine learning bit 
