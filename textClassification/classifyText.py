@@ -96,6 +96,10 @@ vec = DictVectorizer()
 # vectorizer = TfidfVectorizer(min_df=1)
 number_of_reviews = len(true_labels)
 features_dict_np = vec.fit_transform(features_dict)
+pickleDictVecFile = open('dictvect.pkl','wb')
+pickle.dump(vec, pickleDictVecFile, pickle.HIGHEST_PROTOCOL)
+pickleDictVecFile.close()
+
 ''' Selecting K Best features ''' 
 selector = SelectKBest(chi2, k=450)
 true_labels_np = np.array(true_labels)

@@ -55,17 +55,23 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
     return features
 
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
-    vec = DictVectorizer()
+    # tokenize stuff for this review 
     review_text_tokenized = word_tokenize(review_text)
     review_title_tokenized = word_tokenize(review_title)
     review_attraction_tokenized = word_tokenize(review_attraction)
+    # get features 
     thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
+    ''' Load pickle objects ''' 
     classifierFile = open('textClassification/classifier.pkl','rb')
     selectorFile = open('textClassification/selector.pkl','rb')
-    thisFeatures = vec.transform(thisFeatures)
+    vecFile = open('textClassification/DictVect.pkl','rb')
+    vec = pickle.load(vecFile)
     selector = pickle.load(selectorFile)
     classifier = pickle.load(classifierFile)
+    # transform the features for this review 
+    thisFeatures = vec.transform(thisFeatures)
     thisFeatures = selector.transform(thisFeatures)
+    # classify review 
     this_class = classifier.predict(thisFeatures)
     return this_class
 
