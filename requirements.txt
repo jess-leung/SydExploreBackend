@@ -1,5 +1,8 @@
 Django==1.7
+Pillow==2.5.3
 dj-static==0.0.5
+dj-static==0.0.6
+django-toolbelt==0.0.1
 Jinja2==2.7.3
 MarkupSafe==0.23
 PyYAML==3.11
@@ -23,7 +26,7 @@ readline==6.2.4.1
 scikit-learn==0.14.1
 scipy==0.14.0
 six==1.7.3
-static==0.4
+static3==0.5.1
 tornado==3.1.1
 virtualenv==1.11.6
 wsgiref==0.1.2
