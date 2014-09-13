@@ -45,10 +45,10 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
 
         counter+=1
     features[('length_review',len(bodyText))]=1
+    print features
     return features
 
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
-    print 'here'
     review_text_tokenized = word_tokenize(review_text)
     review_title_tokenized = word_tokenize(review_title)
     review_attraction_tokenized = word_tokenize(review_attraction)
