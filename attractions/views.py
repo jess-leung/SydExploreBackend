@@ -15,8 +15,8 @@ labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Edu
 def postReview(request):
     print 'Post from Android'
     try:
-    	# parse JSON 
-    	# print request.body
+        # parse JSON 
+        # print request.body
         data = json.loads(request.body)
         review_title=data['reviewTitle']
         review_text=data['reviewText']
@@ -38,11 +38,11 @@ def postReview(request):
         review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
         print 'This review is classified as: ',review_category
         # TODO
- 		# get the category of the attraction that the review is affecting 
+        # get the category of the attraction that the review is affecting 
 
- 		# increment the voted category by 1 
+        # increment the voted category by 1 
 
- 		# if the voted category > current category, change category of the attraction 
+        # if the voted category > current category, change category of the attraction 
 
         # ENDTODO
 
@@ -56,7 +56,7 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     review_title_tokenized = word_tokenize(review_title)
     review_attraction_tokenized = word_tokenize(review_attraction)
     thisFeatures = getFeatures(review_attraction_tokenized,review_text_tokenized,review_title_tokenized,labels,stopwords)
-	classifierFile = open('textClassification/classifier.pkl','rb')
+    classifierFile = open('textClassification/classifier.pkl','rb')
     classifier = pickle.load(classifierFile)
     this_class = classifier.predict(thisFeatures)
     return this_class
