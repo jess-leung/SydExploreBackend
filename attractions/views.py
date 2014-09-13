@@ -9,6 +9,7 @@ import cPickle as pickle
 import nltk
 from nltk import word_tokenize
 from collections import defaultdict 
+import string
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
