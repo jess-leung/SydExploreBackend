@@ -6,7 +6,7 @@ from sklearn.feature_extraction import DictVectorizer
 import numpy as np
 from sklearn.cross_validation import KFold
 from sklearn import metrics 
-from textClassification.porter2 import stem
+from porter2 import stem
 from sklearn.feature_selection import SelectKBest,chi2
 from sklearn.feature_extraction.text import TfidfVectorizer 
 import string 

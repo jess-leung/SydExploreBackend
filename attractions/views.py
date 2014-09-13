@@ -10,6 +10,7 @@ import nltk
 from nltk import word_tokenize
 from collections import defaultdict 
 import string
+from textClassification.porter2 import stem
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
