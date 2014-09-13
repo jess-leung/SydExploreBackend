@@ -153,6 +153,7 @@ def postReview(request):
         affected_vote_count+=1
         print current_category_count
         print new_category
+        print affected_vote_count
         # if the voted category > current category, change category of the attraction 
         if affected_vote_count > current_category_count: 
             attraction.category = new_category 
