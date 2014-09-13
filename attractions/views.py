@@ -11,6 +11,7 @@ from nltk import word_tokenize
 from collections import defaultdict 
 import string
 from porter2 import stem
+from sklearn.svm import LinearSVC
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
@@ -50,7 +51,6 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
 
         counter+=1
     features[('length_review',len(bodyText))]=1
-    print features
     return features
 
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
@@ -61,7 +61,6 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     classifierFile = open('textClassification/classifier.pkl','rb')
     classifier = pickle.load(classifierFile)
     this_class = classifier.predict(thisFeatures)
-    print this_class
     return this_class
 
 @csrf_exempt    
