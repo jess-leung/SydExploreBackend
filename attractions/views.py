@@ -161,6 +161,8 @@ def postReview(request):
             if tiebreaker == 0: 
                 attraction.category = new_category
 
+        attraction.save()
+
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
     
