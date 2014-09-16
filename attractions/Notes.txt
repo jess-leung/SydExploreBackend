@@ -13,3 +13,5 @@ Run python manage.py migrate to apply those changes to the database.
 
 If the db has changed, run: heroku run python manage.py syncdb 
 
+Jess has changed this file. 
+
