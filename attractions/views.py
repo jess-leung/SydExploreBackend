@@ -17,6 +17,7 @@ import random
 
 stopwords = [] 
 labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Education','Historical','Luxurious']
+labels_mapping = { 'Fun': 'FUN', 'Social': 'SOC', 'Adventurous': 'ADV','Lazy':'LAZ','Hungry':'HUN','Natural':'NAT','Cultural':'CUL','Education':'EDU','Historical':'HIS','Luxurious':'LUX' }
 nltk.data.path.append('textClassification/nltk_data/')
 
 def getFeatures(attraction,title,bodyText,labels,stopwords): 
@@ -177,8 +178,8 @@ def getAttractions(request):
     try: 
         data = json.loads(request.body)
         json_output = '{'
-        category_name=data['category_name']
-        attractions = Attraction.objects.filter(category=category_name).values('name')
+        category_key = labels_mapping[data['category_name']]
+        attractions = Attraction.objects.filter(category=category_key).values('name')
         print attractions 
 
     except Exception,e:
