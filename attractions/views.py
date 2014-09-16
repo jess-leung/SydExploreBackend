@@ -174,10 +174,11 @@ def postReview(request):
 
 @csrf_exempt    
 def getAttractions(request):
-    attractions = ''
+    print 'Getting attractions'
     try: 
         data = json.loads(request.body)
-        json_output = '{'
+        print data
+        print data['category_name']
         category_key = labels_mapping[data['category_name']]
         attractions = Attraction.objects.filter(category=category_key).values('name')
         print attractions 
@@ -185,4 +186,4 @@ def getAttractions(request):
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
 
-    return HttpResponse('Got the attractions ',attractions) 
+    return HttpResponse('Got the attractions') 
