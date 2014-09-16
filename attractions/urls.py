@@ -4,4 +4,5 @@ from attractions import views
 
 urlpatterns = [
     url(r'^postReview/$',views.postReview, name='postReview'),
+    url(r'^getAttractions/$',views.getAttractions, name='getAttractions'),
 ]

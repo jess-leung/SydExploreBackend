@@ -170,3 +170,18 @@ def postReview(request):
         print 'Exception: Could not parse JSON ',str(e)
     
     return HttpResponse('Review Submitted')
+
+@csrf_exempt    
+    def getAttractions(request):
+        attractions = ''
+        try: 
+            data = json.loads(request.body)
+            json_output = '{'
+            category_name=data['category_name']
+            attractions = Attraction.objects.filter(category=category_name).values('name')
+            print attractions 
+
+        except Exception,e:
+            print 'Exception: Could not parse JSON ',str(e)
+
+        return HttpResponse('Got the attractions ',attractions) 
