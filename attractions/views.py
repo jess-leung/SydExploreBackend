@@ -177,13 +177,11 @@ def getAttractions(request):
     print 'Getting attractions'
     try: 
         data = json.loads(request.body)
-        json_string = ''
         category_key = labels_mapping[data['category_name']]
         attractions = Attraction.objects.filter(category=category_key).values('name')
-        # Loop through attractions to construct json string 
-        # for attraction in attractions: 
-            
-
+        json_dump = json.dump(attractions)
+        print attractions
+        return json_dump
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
 
