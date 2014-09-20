@@ -82,8 +82,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
-
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
@@ -106,8 +104,10 @@ ALLOWED_HOSTS = ['*']
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
-AWS_ACCESS_KEY_ID = 'AKIAJJESLIPZ6XPVTDHQ'
-AWS_SECRET_ACCESS_KEY = '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'
+SECRET1 = os.environ['SEBEAWSAccessKeyId']
+SECRET2 = os.environ['SEBEAWSSecretKey']
+AWS_ACCESS_KEY_ID = SECRET1
+AWS_SECRET_ACCESS_KEY = SECRET2
 AWS_STORAGE_BUCKET_NAME = 'sydexplore-attractions'
 STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
 # ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
