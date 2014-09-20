@@ -180,9 +180,8 @@ def getAttractions(request):
         data = json.loads(request.body)
         category_key = labels_mapping[data['category_name']]
         attractions = Attraction.objects.filter(category=category_key).values('name')
-        print type(attractions)
-        print type(attractions[0])
+
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
 
-    return HttpResponse(json.dumps(attractions), content_type="application/json")
+    return HttpResponse(json.dumps(list(attractions)), content_type="application/json")
