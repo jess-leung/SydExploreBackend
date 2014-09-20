@@ -175,6 +175,7 @@ def postReview(request):
 @csrf_exempt    
 def getAttractions(request):
     print 'Getting attractions'
+    attractions=''
     try: 
         data = json.loads(request.body)
         category_key = labels_mapping[data['category_name']]
