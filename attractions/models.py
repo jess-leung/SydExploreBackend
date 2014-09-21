@@ -31,6 +31,7 @@ class Attraction(models.Model):
     url = models.URLField(max_length=200,blank=True)
     location = models.CharField(max_length=200)
     image = models.ImageField(upload_to='/attraction_images/',blank=True) 
+    thumbnail = models.ImageField(upload_to='/attraction_images/thumbnails/',blank=True)
     category = models.CharField(max_length=3,choices=CATEGORY_CHOICES)
     vote_category = models.PositiveIntegerField(default=0)
     vote_adventurous = models.PositiveIntegerField(default=0)
