@@ -193,8 +193,8 @@ def getReviewDetails(request):
     try:
         print 'TRIAL2'
         data=json.loads(request.body)
-        reviewDetails=Review.objects.filter(attraction=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_date')
         print 'TRIAL3'
+        reviewDetails=Review.objects.filter(attraction=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_date')
         print reviewDetails
 
     except Exception,e:
