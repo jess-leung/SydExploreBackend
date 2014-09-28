@@ -194,6 +194,7 @@ def getReviewDetails(request):
         print 'TRIAL2'
         data=json.loads(request.body)
         print 'TRIAL3'
+        attraction_name = data['attraction_name']
         reviewDetails = Review.objects.filter(attraction=attraction_name)
         print 'TRIAL4'
         print reviewDetails
