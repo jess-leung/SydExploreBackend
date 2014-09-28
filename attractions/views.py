@@ -186,3 +186,16 @@ def getAttractions(request):
 
     return HttpResponse(json.dumps(list(attractions)), content_type="application/json")
 
+@csrf_exempt
+def getReviewDetails(request):
+    reviewDetails=''
+    try:
+        data=json.loads(request.body)
+        reviewDetails=Review.objects.filter(attraction=category_name).values('review_text','reviewer_name','review_title','review_rating','review_date')
+        print reviewDetails
+
+    except Exception,e:
+        print 'Exception: Could not parse JSON'
+
+    return HTTPResponse('Got all the reviews')
+
