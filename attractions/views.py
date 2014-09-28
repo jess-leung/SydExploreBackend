@@ -200,5 +200,5 @@ def getReviewDetails(request):
     except Exception,e:
         print 'Exception: Could not parse JSON'
 
-    return HTTPResponse(json.dumps(list(reviewDetails)), content_type="application/json")
+    return HttpResponse(json.dumps(list(reviewDetails)), content_type="application/json")
 
