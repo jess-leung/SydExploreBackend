@@ -179,8 +179,11 @@ def getAttractions(request):
     try: 
         data = json.loads(request.body)
         category_key = labels_mapping[data['category_name']]
-        attractions = Attraction.objects.filter(category=category_key).values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image')
-        print attractions
+        attractions=[]
+        if category_key=="All":
+            attractions=Attraction.objects.values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image')
+        else:
+            attractions = Attraction.objects.filter(category=category_key).values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image')
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
 
@@ -188,14 +191,10 @@ def getAttractions(request):
 
 @csrf_exempt
 def getReviewDetails(request):
-    print 'TRIAL1'
     reviewDetails=''
     try:
-        print 'TRIAL2'
         data=json.loads(request.body)
-        print 'TRIAL3'
         attraction_name = data['attraction_name'] 
-        print 'TRIAL4'
         reviewDetails = Review.objects.filter(attraction__name=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_date')
         print reviewDetails
                 
