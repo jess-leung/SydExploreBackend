@@ -195,13 +195,12 @@ def getReviewDetails(request):
         data=json.loads(request.body)
         print 'TRIAL3'
         attraction_name = data['attraction_name'] 
-        reviewDetails = Review.objects.filter(attraction__name=attraction_name)
-        print 'TRIAL4'
+        reviewDetails = Review.objects.filter(name__attraction=attraction_name)
+        print 'Getting review details'
+        print reviewDetails
         
     except Exception,e:
         print 'Exception: Could not parse JSON'
 
-    print 'TRIAL5'
-    print json.dumps(list(reviewDetails))
     return HttpResponse(json.dumps(list(reviewDetails)), content_type="application/json")
 
