@@ -104,8 +104,8 @@ ALLOWED_HOSTS = ['*']
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
-#SECRET1 = os.environ['SEBEAWSAccessKeyId']
-#SECRET2 = os.environ['SEBEAWSSecretKey']
+SECRET1 = os.environ['SEBEAWSAccessKeyId']
+SECRET2 = os.environ['SEBEAWSSecretKey']
 AWS_ACCESS_KEY_ID = SECRET1
 AWS_SECRET_ACCESS_KEY = SECRET2
 AWS_STORAGE_BUCKET_NAME = 'sydexplore-attractions'
