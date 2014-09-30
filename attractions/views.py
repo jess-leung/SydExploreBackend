@@ -197,7 +197,7 @@ def getReviewDetails(request):
         attraction_name = data['attraction_name'] 
         print 'TRIAL4'
         reviewDetails = Review.objects.filter(attraction__name=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_date')
-        print 'Getting review details'
+        print reviewDetails
                 
     except Exception,e:
         print 'Exception: Could not parse JSON'
