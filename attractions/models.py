@@ -57,3 +57,4 @@ class Review(models.Model):
     review_title = models.CharField(max_length=200)
     review_rating = models.FloatField(default=0.0)
     review_date = models.DateTimeField(auto_now_add=True)
+    review_category = models.CharField(max_length=30)

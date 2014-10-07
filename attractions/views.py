@@ -93,16 +93,16 @@ def postReview(request):
         attraction = Attraction.objects.get(name=review_attraction)
         # attraction_id = attraction.id 
 
-        # create review 
-        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction)
-        r.save()
-
         for line in open('textClassification/stopwords'):
             stopwords.append(line.strip()) 
 
         # onto the machine learning bit 
-        review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)
+        review_category = classifyReview(review_attraction,review_text, review_title,labels,stopwords)[0]
         print 'This review is classified as: ',review_category
+
+        # create review 
+        r = Review(review_title=review_title, reviewer_name=reviewer_name, review_text=review_text, review_rating=review_rating, attraction=attraction,review_category=review_category)
+        r.save()
 
         # get the category of the attraction that the review is affecting 
         # and increment the voted category by 1 
