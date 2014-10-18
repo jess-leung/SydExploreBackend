@@ -21,7 +21,7 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
     titleCount=0
     for word in title: 
         if word.lower() not in stopwords: 
-            features[('title_word',word.lower())]=1
+            # features[('title_word',word.lower())]=1
             if word.lower() in labels:
                 features[('title_label',word.lower())]=1
             if titleCount==0:
