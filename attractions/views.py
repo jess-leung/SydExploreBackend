@@ -180,10 +180,10 @@ def getAttractions(request):
         data = json.loads(request.body)
         attractions=[]
         if data['category_name']=="All":
-            attractions=Attraction.objects.values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image')
+            attractions=Attraction.objects.values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image','category')
         else: 
             category_key = labels_mapping[data['category_name']]
-            attractions = Attraction.objects.filter(category=category_key).values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image')
+            attractions = Attraction.objects.filter(category=category_key).values('name','location','latitude','longitude','thumbnail','opening_hours','description','url','image','category')
     except Exception,e:
         print 'Exception: Could not parse JSON ',str(e)
 
