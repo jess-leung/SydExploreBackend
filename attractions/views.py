@@ -196,6 +196,9 @@ def getReviewDetails(request):
         data=json.loads(request.body)
         attraction_name = data['attraction_name'] 
         reviewDetails = Review.objects.filter(attraction__name=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_category')
+        #for item in review_details:
+        	#item['review_date'].strftime('%m/%d/%Y')
+        	#print item['review_date']
         print reviewDetails
                 
     except Exception,e:
