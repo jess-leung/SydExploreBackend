@@ -20,6 +20,7 @@ labels = ['Fun','Social','Adventurous','Lazy','Hungry','Natural','Cultural','Edu
 labels_mapping = { 'Fun': 'FUN', 'Social': 'SOC', 'Adventurous': 'ADV','Lazy':'LAZ','Hungry':'HUN','Natural':'NAT','Cultural':'CUL','Education':'EDU','Historical':'HIS','Luxurious':'LUX' }
 nltk.data.path.append('textClassification/nltk_data/')
 
+''' Get features from the review submitted '''
 def getFeatures(attraction,title,bodyText,labels,stopwords): 
     features = defaultdict() 
     for word in attraction: 
@@ -56,6 +57,7 @@ def getFeatures(attraction,title,bodyText,labels,stopwords):
     features[('length_review',len(bodyText))]=1
     return features
 
+''' Classify the review into one of the predefined categories '''
 def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
     # tokenize stuff for this review 
     review_text_tokenized = word_tokenize(review_text)
@@ -81,8 +83,6 @@ def classifyReview(review_attraction,review_text,review_title,labels,stopwords):
 def postReview(request):
     print 'Post from Android'
     try:
-        # parse JSON 
-        # print request.body
         data = json.loads(request.body)
         review_title=data['reviewTitle']
         review_text=data['reviewText']
@@ -91,7 +91,6 @@ def postReview(request):
         review_attraction=data['attraction']
         # search what the attraction id is 
         attraction = Attraction.objects.get(name=review_attraction)
-        # attraction_id = attraction.id 
 
         for line in open('textClassification/stopwords'):
             stopwords.append(line.strip()) 
@@ -155,6 +154,7 @@ def postReview(request):
         print current_category_count
         print new_category
         print affected_vote_count
+
         # if the voted category > current category, change category of the attraction 
         if affected_vote_count > current_category_count: 
             attraction.category = new_category 
@@ -196,9 +196,6 @@ def getReviewDetails(request):
         data=json.loads(request.body)
         attraction_name = data['attraction_name'] 
         reviewDetails = Review.objects.filter(attraction__name=attraction_name).values('review_text','reviewer_name','review_title','review_rating','review_category')
-        #for item in review_details:
-        	#item['review_date'].strftime('%m/%d/%Y')
-        	#print item['review_date']
         print reviewDetails
                 
     except Exception,e:
